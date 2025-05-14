@@ -8,8 +8,8 @@ from matplotlib.gridspec import GridSpec
 # Load your data
 @st.cache_data
 def load_data():
-    df_start = pd.read_csv("data/df_start.csv", parse_dates=['DateCourse'])
-    df_end = pd.read_csv("data/df_end.csv", parse_dates=['DateCourse'])
+    df_start = pd.read_csv("data/soustraitance_terminusstart.csv", parse_dates=['DateCourse'])
+    df_end = pd.read_csv("data/soustraitance_terminusend.csv", parse_dates=['DateCourse'])
     return df_start, df_end
 
 df_start, df_end = load_data()
