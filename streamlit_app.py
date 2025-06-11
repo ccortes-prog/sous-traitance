@@ -21,7 +21,20 @@ category = st.sidebar.selectbox("Select Category", ['All'] + categories)
 
 min_date = df_start['DateCourse'].min()
 max_date = df_start['DateCourse'].max()
-start_date, end_date = st.sidebar.date_input("Select Date Range", [min_date, max_date])
+# with this:
+date_range = st.sidebar.date_input(
+    "Select Date Range",
+    value=[min_date, max_date],
+    min_value=min_date,
+    max_value=max_date
+)
+
+# now unpack safely
+if isinstance(date_range, (list, tuple)) and len(date_range) == 2:
+    start_date, end_date = date_range
+else:
+    # user only picked one date → treat start=end
+    start_date = end_date = date_range
 
 # Apply filters
 mask = (df_start['DateCourse'] >= pd.to_datetime(start_date)) & (df_start['DateCourse'] <= pd.to_datetime(end_date))
